@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import {
   Instagram,
   Twitter,
-  Mail,
+  Phone,
   ArrowRight,
   Star,
   Play,
@@ -70,149 +70,569 @@ const FadeIn = ({ children, delay = 0, direction = "up", className = "" }) => {
 // --- DATA ---
 const PORTFOLIO_DATA = [
   {
+    id: 101,
+    title: "bymar.mar",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774792571/WhatsApp_Image_2026-03-29_at_21.50.48_1_ucbfyi.jpg",
+    aspect: "aspect-[4/3]",
+    delay: 0,
+  },
+  {
+    id: 102,
+    title: "bymar.mar",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774792572/WhatsApp_Image_2026-03-29_at_21.50.49_2_ifcxmf.jpg",
+    aspect: "aspect-[4/3]",
+    delay: 150,
+  },
+  {
+    id: 103,
+    title: "bymar.mar",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774792571/WhatsApp_Image_2026-03-29_at_21.50.48_uqt6p7.jpg",
+    aspect: "aspect-[4/3]",
+    delay: 300,
+  },
+  {
+    id: 104,
+    title: "bymar.mar",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774792571/WhatsApp_Image_2026-03-29_at_21.50.49_1_owum6h.jpg",
+    aspect: "aspect-[4/3]",
+    delay: 0,
+  },
+  {
+    id: 105,
+    title: "bymar.mar",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774792572/WhatsApp_Image_2026-03-29_at_21.50.49_kjel0s.jpg",
+    aspect: "aspect-[4/3]",
+    delay: 150,
+  },
+  {
     id: 1,
-    title: "Vogue Paris",
-    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1773488153/WhatsApp_Image_2026-03-14_at_19.32.23_1_qq3mgs.jpg",
+    title: "Trilokamuabali",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1773488144/WhatsApp_Image_2026-03-14_at_19.29.59_ezucsu.jpg",
     aspect: "aspect-[3/4]",
     delay: 0,
   },
   {
     id: 2,
-    title: "Summer Collection",
-    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1773488152/WhatsApp_Image_2026-03-14_at_19.32.22_2_iahvm4.jpg",
+    title: "Trilokamuabali",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1773488144/WhatsApp_Image_2026-03-14_at_19.29.59_13_y8qsoq.jpg",
     aspect: "aspect-[4/5]",
     delay: 150,
   },
   {
     id: 3,
-    title: "Chanel Beauty",
-    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1773488146/WhatsApp_Image_2026-03-14_at_19.29.59_8_iv8cyq.jpg",
+    title: "Trilokamuabali",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1773488142/WhatsApp_Image_2026-03-14_at_19.29.59_7_ncqrhm.jpg",
     aspect: "aspect-[3/4]",
     delay: 300,
   },
   {
     id: 4,
-    title: "Urban Elegance",
-    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1773488145/WhatsApp_Image_2026-03-14_at_19.32.22_kuiec2.jpg",
+    title: "Trilokamuabali",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1773488142/WhatsApp_Image_2026-03-14_at_19.29.59_11_rueaa1.jpg",
     aspect: "aspect-[4/5]",
     delay: 0,
   },
   {
     id: 5,
-    title: "Neon Dreams",
-    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1773488145/WhatsApp_Image_2026-03-14_at_19.32.22_1_cl8fhk.jpg",
+    title: "Trilokamuabali",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1773488141/WhatsApp_Image_2026-03-14_at_19.29.59_6_a6z8oa.jpg",
     aspect: "aspect-[3/4]",
     delay: 150,
   },
   {
     id: 6,
-    title: "Silk & Shadows",
-    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1773488144/WhatsApp_Image_2026-03-14_at_19.29.59_ezucsu.jpg",
+    title: "Trilokamuabali",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1773488141/WhatsApp_Image_2026-03-14_at_19.29.59_12_ssaerm.jpg",
     aspect: "aspect-[4/5]",
     delay: 300,
   },
   {
     id: 7,
-    title: "Studio Session I",
-    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1773488144/WhatsApp_Image_2026-03-14_at_19.29.59_13_y8qsoq.jpg",
+    title: "Trilokamuabali",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1773488140/WhatsApp_Image_2026-03-14_at_19.29.59_10_jffws0.jpg",
     aspect: "aspect-[3/4]",
     delay: 0,
   },
   {
     id: 8,
-    title: "Studio Session II",
-    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1773488142/WhatsApp_Image_2026-03-14_at_19.29.59_7_ncqrhm.jpg",
+    title: "Trilokamuabali",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1773488139/WhatsApp_Image_2026-03-14_at_19.29.59_5_rzpngv.jpg",
     aspect: "aspect-[4/5]",
     delay: 150,
   },
   {
     id: 9,
-    title: "Studio Session III",
-    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1773488142/WhatsApp_Image_2026-03-14_at_19.29.59_11_rueaa1.jpg",
+    title: "Trilokamuabali",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1773488140/WhatsApp_Image_2026-03-14_at_19.29.59_9_ntgkn6.jpg",
     aspect: "aspect-[3/4]",
     delay: 300,
   },
   {
     id: 10,
-    title: "Studio Session IV",
-    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1773488141/WhatsApp_Image_2026-03-14_at_19.29.59_12_ssaerm.jpg",
+    title: "Balibee Beauty",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774792026/WhatsApp_Image_2026-03-29_at_21.46.37_1_puitak.jpg",
     aspect: "aspect-[4/5]",
     delay: 0,
   },
   {
     id: 11,
-    title: "Studio Session V",
-    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1773488140/WhatsApp_Image_2026-03-14_at_19.29.59_10_jffws0.jpg",
+    title: "Balibee Beauty",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774792026/WhatsApp_Image_2026-03-29_at_21.46.37_2_ftsftg.jpg",
     aspect: "aspect-[3/4]",
     delay: 150,
   },
   {
     id: 12,
-    title: "Studio Session VI",
-    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1773488140/WhatsApp_Image_2026-03-14_at_19.29.59_9_ntgkn6.jpg",
+    title: "Balibee Beauty",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774792026/WhatsApp_Image_2026-03-29_at_21.46.37_3_h9byqu.jpg",
     aspect: "aspect-[4/5]",
     delay: 300,
   },
   {
     id: 13,
-    title: "Studio Session VII",
-    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1773488139/WhatsApp_Image_2026-03-14_at_19.29.59_5_rzpngv.jpg",
+    title: "Balibee Beauty",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774792027/WhatsApp_Image_2026-03-29_at_21.46.37_4_he5fv1.jpg",
     aspect: "aspect-[3/4]",
     delay: 0,
   },
   {
     id: 14,
-    title: "Studio Session VIII",
-    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1773488138/WhatsApp_Image_2026-03-14_at_19.32.23_adndlp.jpg",
+    title: "Priscill Pangestu",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774792027/WhatsApp_Image_2026-03-29_at_21.46.37_5_yl0fqa.jpg",
     aspect: "aspect-[4/5]",
     delay: 150,
   },
   {
     id: 15,
-    title: "Studio Session IX",
-    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1773488138/WhatsApp_Image_2026-03-14_at_19.29.59_1_jl9qkv.jpg",
+    title: "Priscill Pangestu",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774792027/WhatsApp_Image_2026-03-29_at_21.46.37_7_qyauwz.jpg",
     aspect: "aspect-[3/4]",
     delay: 300,
   },
   {
     id: 16,
-    title: "Studio Session X",
-    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1773488137/WhatsApp_Image_2026-03-14_at_19.29.59_3_emauna.jpg",
+    title: "Balibee Beauty",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774792029/WhatsApp_Image_2026-03-29_at_21.46.37_tkwmxo.jpg",
     aspect: "aspect-[4/5]",
     delay: 0,
   },
   {
     id: 17,
-    title: "Studio Session XI",
-    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1773488137/WhatsApp_Image_2026-03-14_at_19.29.59_4_z0y9jz.jpg",
+    title: "Balibee Beauty",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774792030/WhatsApp_Image_2026-03-29_at_21.46.37_6_ml4v2u.jpg",
     aspect: "aspect-[3/4]",
     delay: 150,
   },
   {
     id: 18,
-    title: "Studio Session XII",
+    title: "Krisna Bali Makeup",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1773488153/WhatsApp_Image_2026-03-14_at_19.32.23_1_qq3mgs.jpg",
+    aspect: "aspect-[4/5]",
+    delay: 0,
+  },
+  {
+    id: 19,
+    title: "Krisna Bali Makeup",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1773488152/WhatsApp_Image_2026-03-14_at_19.32.22_2_iahvm4.jpg",
+    aspect: "aspect-[3/4]",
+    delay: 150,
+  },
+  {
+    id: 20,
+    title: "Trilokamuabali",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1773488146/WhatsApp_Image_2026-03-14_at_19.29.59_8_iv8cyq.jpg",
+    aspect: "aspect-[4/5]",
+    delay: 300,
+  },
+  {
+    id: 21,
+    title: "Krisna Bali Makeup",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1773488145/WhatsApp_Image_2026-03-14_at_19.32.22_kuiec2.jpg",
+    aspect: "aspect-[3/4]",
+    delay: 0,
+  },
+  {
+    id: 22,
+    title: "Krisna Bali Makeup",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1773488145/WhatsApp_Image_2026-03-14_at_19.32.22_1_cl8fhk.jpg",
+    aspect: "aspect-[4/5]",
+    delay: 150,
+  },
+  {
+    id: 23,
+    title: "Krisna Bali Makeup",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1773488138/WhatsApp_Image_2026-03-14_at_19.32.23_adndlp.jpg",
+    aspect: "aspect-[4/5]",
+    delay: 150,
+  },
+  {
+    id: 24,
+    title: "Trilokamuabali",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1773488138/WhatsApp_Image_2026-03-14_at_19.29.59_1_jl9qkv.jpg",
+    aspect: "aspect-[3/4]",
+    delay: 300,
+  },
+  {
+    id: 25,
+    title: "Trilokamuabali",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1773488137/WhatsApp_Image_2026-03-14_at_19.29.59_3_emauna.jpg",
+    aspect: "aspect-[4/5]",
+    delay: 0,
+  },
+  {
+    id: 26,
+    title: "Trilokamuabali",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1773488137/WhatsApp_Image_2026-03-14_at_19.29.59_4_z0y9jz.jpg",
+    aspect: "aspect-[3/4]",
+    delay: 150,
+  },
+  {
+    id: 27,
+    title: "Trilokamuabali",
     img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1773488137/WhatsApp_Image_2026-03-14_at_19.29.59_2_nxb21g.jpg",
     aspect: "aspect-[4/5]",
     delay: 300,
+  },
+  {
+    id: 201,
+    title: "roxzeacademy",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774791842/WhatsApp_Image_2026-03-29_at_21.31.06_fq4vuo.jpg",
+    aspect: "aspect-[4/5]",
+    delay: 0,
+  },
+  {
+    id: 202,
+    title: "roxzeacademy",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774791842/WhatsApp_Image_2026-03-29_at_21.31.05_xsc74k.jpg",
+    aspect: "aspect-[3/4]",
+    delay: 150,
+  },
+  {
+    id: 203,
+    title: "roxzeacademy",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774791839/WhatsApp_Image_2026-03-29_at_21.31.06_1_iskgbx.jpg",
+    aspect: "aspect-[4/5]",
+    delay: 300,
+  },
+  {
+    id: 204,
+    title: "roxzeacademy",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774791839/WhatsApp_Image_2026-03-29_at_21.31.05_1_myzz0b.jpg",
+    aspect: "aspect-[3/4]",
+    delay: 0,
+  },
+  {
+    id: 205,
+    title: "roxzeacademy",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774791836/WhatsApp_Image_2026-03-29_at_21.30.36_1_ueiw9n.jpg",
+    aspect: "aspect-[4/5]",
+    delay: 150,
+  },
+  {
+    id: 206,
+    title: "roxzeacademy",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774791835/WhatsApp_Image_2026-03-29_at_21.30.35_lvz5wj.jpg",
+    aspect: "aspect-[3/4]",
+    delay: 300,
+  },
+  {
+    id: 207,
+    title: "makeupbyayudevik",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774791842/WhatsApp_Image_2026-03-29_at_21.31.13_gzibq9.jpg",
+    aspect: "aspect-[4/5]",
+    delay: 0,
+  },
+  {
+    id: 208,
+    title: "makeupbyayudevik",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774791842/WhatsApp_Image_2026-03-29_at_21.31.12_sqgx1y.jpg",
+    aspect: "aspect-[3/4]",
+    delay: 150,
+  },
+  {
+    id: 209,
+    title: "makeupbyayudevik",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774791842/WhatsApp_Image_2026-03-29_at_21.31.11_ae2pzv.jpg",
+    aspect: "aspect-[4/5]",
+    delay: 300,
+  },
+  {
+    id: 210,
+    title: "makeupbyayudevik",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774791842/WhatsApp_Image_2026-03-29_at_21.31.10_d3zm3t.jpg",
+    aspect: "aspect-[3/4]",
+    delay: 0,
+  },
+  {
+    id: 211,
+    title: "makeupbyayudevik",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774791841/WhatsApp_Image_2026-03-29_at_21.31.09_m14uor.jpg",
+    aspect: "aspect-[4/5]",
+    delay: 150,
+  },
+  {
+    id: 212,
+    title: "makeupbyayudevik",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774791841/WhatsApp_Image_2026-03-29_at_21.31.09_1_w6q1qu.jpg",
+    aspect: "aspect-[3/4]",
+    delay: 300,
+  },
+  {
+    id: 213,
+    title: "firlamakeupart",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774791840/WhatsApp_Image_2026-03-29_at_21.31.08_qdh3fs.jpg",
+    aspect: "aspect-[4/5]",
+    delay: 0,
+  },
+  {
+    id: 214,
+    title: "firlamakeupart",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774791840/WhatsApp_Image_2026-03-29_at_21.31.07_vslbx2.jpg",
+    aspect: "aspect-[3/4]",
+    delay: 150,
+  },
+  {
+    id: 215,
+    title: "firlamakeupart",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774791840/WhatsApp_Image_2026-03-29_at_21.31.07_1_smljeh.jpg",
+    aspect: "aspect-[4/5]",
+    delay: 300,
+  },
+  {
+    id: 216,
+    title: "firlamakeupart",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774791836/WhatsApp_Image_2026-03-29_at_21.30.37_kz8yfz.jpg",
+    aspect: "aspect-[3/4]",
+    delay: 0,
+  },
+  {
+    id: 217,
+    title: "makeuupbywindanyargt",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774791839/WhatsApp_Image_2026-03-29_at_21.31.01_1_ycoilj.jpg",
+    aspect: "aspect-[4/5]",
+    delay: 150,
+  },
+  {
+    id: 218,
+    title: "makeuupbywindanyargt",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774791839/WhatsApp_Image_2026-03-29_at_21.31.02_u6prt0.jpg",
+    aspect: "aspect-[3/4]",
+    delay: 300,
+  },
+  {
+    id: 219,
+    title: "makeuupbywindanyargt",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774791838/WhatsApp_Image_2026-03-29_at_21.31.02_1_dwve3f.jpg",
+    aspect: "aspect-[4/5]",
+    delay: 0,
+  },
+  {
+    id: 220,
+    title: "by.manobeaute",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774791838/WhatsApp_Image_2026-03-29_at_21.31.01_gcmghd.jpg",
+    aspect: "aspect-[3/4]",
+    delay: 150,
+  },
+  {
+    id: 221,
+    title: "by.manobeaute",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774791838/WhatsApp_Image_2026-03-29_at_21.31.00_1_dnpeum.jpg",
+    aspect: "aspect-[4/5]",
+    delay: 300,
+  },
+  {
+    id: 222,
+    title: "by.manobeaute",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774791838/WhatsApp_Image_2026-03-29_at_21.31.00_z1sski.jpg",
+    aspect: "aspect-[3/4]",
+    delay: 0,
+  },
+  {
+    id: 223,
+    title: "Krisna Bali Makeup",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774791838/WhatsApp_Image_2026-03-29_at_21.30.59_l1cffj.jpg",
+    aspect: "aspect-[4/5]",
+    delay: 150,
+  },
+  {
+    id: 224,
+    title: "Krisna Bali Makeup",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774791836/WhatsApp_Image_2026-03-29_at_21.30.36_avd63a.jpg",
+    aspect: "aspect-[3/4]",
+    delay: 300,
+  },
+  {
+    id: 225,
+    title: "Krisna Bali Makeup",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774791836/WhatsApp_Image_2026-03-29_at_21.30.33_fb3apc.jpg",
+    aspect: "aspect-[4/5]",
+    delay: 0,
+  },
+  {
+    id: 226,
+    title: "wulanmakeupbali",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774791837/WhatsApp_Image_2026-03-29_at_21.31.04_npgmai.jpg",
+    aspect: "aspect-[3/4]",
+    delay: 150,
+  },
+  {
+    id: 227,
+    title: "wulanmakeupbali",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774791835/WhatsApp_Image_2026-03-29_at_21.31.03_1_unfxay.jpg",
+    aspect: "aspect-[4/5]",
+    delay: 300,
+  },
+  {
+    id: 228,
+    title: "wulanmakeupbali",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774791836/WhatsApp_Image_2026-03-29_at_21.31.03_nmxmy7.jpg",
+    aspect: "aspect-[3/4]",
+    delay: 0,
+  },
+  {
+    id: 229,
+    title: "krishnaari.mua",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774791837/WhatsApp_Image_2026-03-29_at_21.31.04_1_d2xnqb.jpg",
+    aspect: "aspect-[4/5]",
+    delay: 150,
+  },
+  {
+    id: 230,
+    title: "rubybeautymua",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774793271/WhatsApp_Image_2026-03-29_at_22.02.21_ppt8eh.jpg",
+    aspect: "aspect-[3/4]",
+    delay: 300,
+  },
+  {
+    id: 231,
+    title: "rubybeautymua",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774793271/WhatsApp_Image_2026-03-29_at_22.02.23_dks3ex.jpg",
+    aspect: "aspect-[4/5]",
+    delay: 0,
+  },
+  {
+    id: 232,
+    title: "rubybeautymua",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774793271/WhatsApp_Image_2026-03-29_at_22.02.24_1_upjikf.jpg",
+    aspect: "aspect-[3/4]",
+    delay: 150,
+  },
+  {
+    id: 233,
+    title: "rubybeautymua",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774793272/WhatsApp_Image_2026-03-29_at_22.02.25_1_wkq9kl.jpg",
+    aspect: "aspect-[4/5]",
+    delay: 300,
+  },
+  {
+    id: 234,
+    title: "rubybeautymua",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774793271/WhatsApp_Image_2026-03-29_at_22.02.22_cezwzo.jpg",
+    aspect: "aspect-[3/4]",
+    delay: 0,
+  },
+  {
+    id: 235,
+    title: "rubybeautymua",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774793272/WhatsApp_Image_2026-03-29_at_22.02.25_2_bge28f.jpg",
+    aspect: "aspect-[4/5]",
+    delay: 150,
+  },
+  {
+    id: 236,
+    title: "rubybeautymua",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774793272/WhatsApp_Image_2026-03-29_at_22.02.25_qwy1dn.jpg",
+    aspect: "aspect-[3/4]",
+    delay: 300,
+  },
+  {
+    id: 237,
+    title: "rubybeautymua",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774793272/WhatsApp_Image_2026-03-29_at_22.02.24_jtrpxl.jpg",
+    aspect: "aspect-[4/5]",
+    delay: 0,
+  },
+  {
+    id: 238,
+    title: "agrapanabeachvilla",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774793272/WhatsApp_Image_2026-03-29_at_22.04.26_fhh17d.jpg",
+    aspect: "aspect-[3/4]",
+    delay: 150,
+  },
+  {
+    id: 239,
+    title: "rahayuarth_makeup",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774794034/WhatsApp_Image_2026-03-29_at_22.19.07_1_vvkxjm.jpg",
+    aspect: "aspect-[4/5]",
+    delay: 0,
+  },
+  {
+    id: 240,
+    title: "rahayuarth_makeup",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774794035/WhatsApp_Image_2026-03-29_at_22.19.08_1_el2as9.jpg",
+    aspect: "aspect-[3/4]",
+    delay: 150,
+  },
+  {
+    id: 241,
+    title: "rahayuarth_makeup",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774794035/WhatsApp_Image_2026-03-29_at_22.19.08_gbhrhl.jpg",
+    aspect: "aspect-[4/5]",
+    delay: 300,
+  },
+  {
+    id: 242,
+    title: "rahayuarth_makeup",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774794036/WhatsApp_Image_2026-03-29_at_22.19.09_jnwgzr.jpg",
+    aspect: "aspect-[3/4]",
+    delay: 0,
+  },
+  {
+    id: 243,
+    title: "jegegayumua",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774794035/WhatsApp_Image_2026-03-29_at_22.19.06_1_fao1zd.jpg",
+    aspect: "aspect-[4/5]",
+    delay: 150,
+  },
+  {
+    id: 244,
+    title: "jegegayumua",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774794034/WhatsApp_Image_2026-03-29_at_22.19.06_2_fehumg.jpg",
+    aspect: "aspect-[3/4]",
+    delay: 300,
+  },
+  {
+    id: 245,
+    title: "jegegayumua",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774794034/WhatsApp_Image_2026-03-29_at_22.19.07_ziukux.jpg",
+    aspect: "aspect-[4/5]",
+    delay: 0,
+  },
+  {
+    id: 246,
+    title: "jegegayumua",
+    img: "https://res.cloudinary.com/dccj9vlyq/image/upload/v1774794034/WhatsApp_Image_2026-03-29_at_22.19.06_oefitm.jpg",
+    aspect: "aspect-[3/4]",
+    delay: 150,
   },
 ];
 
 const SERVICES = [
   {
-    title: "Fashion Modeling",
-    desc: "Runway, editorial, and lookbook modeling with a distinctive, adaptable presence.",
+    title: "Muse Makeup",
+    desc: "Collaborative muse sessions for makeup artists who want expressive beauty visuals.",
   },
   {
-    title: "Brand Ambassador",
-    desc: "Authentic representation and luxurious alignment for premium fashion and beauty brands.",
+    title: "Photoshoots",
+    desc: "Studio and on-location shoots with adaptable mood, styling, and camera presence.",
   },
   {
-    title: "Commercial Campaign",
-    desc: "High-impact visual storytelling for global campaigns and digital media.",
+    title: "Talent Collaboration",
+    desc: "Open to work with photographers, stylists, MUAs, and creative teams across concepts.",
   },
   {
-    title: "Event Appearance",
-    desc: "Elevating high-profile events with undeniable grace and professional charm.",
+    title: "Upcoming Campaigns",
+    desc: "Available for fresh campaign concepts with growing artistic vision and dedication.",
   },
 ];
 
@@ -234,9 +654,27 @@ const TESTIMONIALS = [
   },
 ];
 
+const slugifyTitle = (title) =>
+  title
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+const getProjectSlugFromHash = (hash) => {
+  const cleanedHash = hash.replace(/^#/, "");
+  if (!cleanedHash.startsWith("project/")) return "";
+  return cleanedHash.slice("project/".length);
+};
+
 export default function App() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
+  const [activeProjectSlug, setActiveProjectSlug] = useState(() =>
+    getProjectSlugFromHash(window.location.hash),
+  );
+  const lastCatalogScrollY = useRef(0);
+  const shouldRestoreCatalogScroll = useRef(false);
 
   // Handle Navbar Scroll
   useEffect(() => {
@@ -254,6 +692,91 @@ export default function App() {
     }, 5000);
     return () => clearInterval(timer);
   }, []);
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      setActiveProjectSlug(getProjectSlugFromHash(window.location.hash));
+    };
+
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, []);
+
+  useEffect(() => {
+    if (activeProjectSlug) {
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+      return;
+    }
+
+    if (shouldRestoreCatalogScroll.current) {
+      window.scrollTo({
+        top: lastCatalogScrollY.current,
+        left: 0,
+        behavior: "auto",
+      });
+      shouldRestoreCatalogScroll.current = false;
+    }
+  }, [activeProjectSlug]);
+
+  const activeProjectTitle =
+    PORTFOLIO_DATA.find(
+      (item) => slugifyTitle(item.title) === activeProjectSlug,
+    )?.title || "";
+  const activeProjectImages = activeProjectTitle
+    ? PORTFOLIO_DATA.filter((item) => item.title === activeProjectTitle)
+    : [];
+
+  const openProject = (title) => {
+    lastCatalogScrollY.current = window.scrollY;
+    window.location.hash = `project/${slugifyTitle(title)}`;
+  };
+
+  const closeProject = () => {
+    shouldRestoreCatalogScroll.current = true;
+    window.location.hash = "portfolio";
+  };
+
+  if (activeProjectTitle) {
+    return (
+      <div className="font-sans text-stone-800 bg-[#FFFFFF] min-h-screen">
+        <section className="py-20 md:py-28">
+          <div className="max-w-7xl mx-auto px-6 md:px-12">
+            <button
+              onClick={closeProject}
+              className="inline-flex items-center gap-2 text-sm text-stone-600 hover:text-pink-500 transition-colors mb-8"
+            >
+              <ChevronLeft size={18} />
+              Back to Catalog
+            </button>
+            <h1 className="text-4xl md:text-6xl font-serif text-stone-900 mb-3">
+              {activeProjectTitle}
+            </h1>
+            <p className="text-stone-500 mb-10">
+              {activeProjectImages.length} photo
+              {activeProjectImages.length > 1 ? "s" : ""} in this project
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {activeProjectImages.map((item, index) => (
+                <div
+                  key={`${item.id}-${index}`}
+                  className={`relative overflow-hidden rounded-[2rem] shadow-lg ${item.aspect} bg-white p-2 border border-pink-50`}
+                >
+                  <div className="relative w-full h-full rounded-[1.5rem] overflow-hidden">
+                    <img
+                      src={item.img}
+                      alt={item.title}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </div>
+    );
+  }
 
   return (
     <div className="font-sans text-stone-800 bg-[#FFFFFF] overflow-x-hidden selection:bg-pink-200 selection:text-pink-900">
@@ -393,9 +916,9 @@ export default function App() {
 
             <FadeIn delay={500} direction="up">
               <p className="text-xl md:text-3xl font-light text-stone-600 mb-10 max-w-lg leading-relaxed">
-                Luxury presence. <br />
+                Luxury Presence, <br />
                 <span className="italic text-pink-400 font-serif">
-                  Editorial energy.
+                  Magnetic Beauty
                 </span>
               </p>
             </FadeIn>
@@ -422,10 +945,12 @@ export default function App() {
                 Available For
               </p>
               <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-stone-600 font-serif italic">
-                <span>Fashion</span> <span className="text-pink-300">•</span>
-                <span>Commercial</span> <span className="text-pink-300">•</span>
-                <span>Events</span> <span className="text-pink-300">•</span>
-                <span>Editorial</span>
+                <span>muse makeup</span>{" "}
+                <span className="text-pink-300">•</span>
+                <span>photoshoots</span>{" "}
+                <span className="text-pink-300">•</span>
+                <span>talent</span> <span className="text-pink-300">•</span>
+                <span>upcoming campaigns</span>
               </div>
             </FadeIn>
           </div>
@@ -440,9 +965,9 @@ export default function App() {
               {/* Main Image */}
               <div className="absolute inset-0 rounded-[2rem] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.15)] border-[6px] border-white/80 bg-white">
                 <img
-                  src="https://res.cloudinary.com/dccj9vlyq/image/upload/v1773488144/WhatsApp_Image_2026-03-14_at_19.29.59_13_y8qsoq.jpg"
+                  src="https://res.cloudinary.com/dccj9vlyq/image/upload/v1774791843/WhatsApp_Image_2026-03-29_at_21.35.22_jxdycr.jpg"
                   alt="Gekta Hero"
-                  className="w-full h-full object-cover object-[70%_30%] scale-150"
+                  className="w-full h-full object-cover "
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-pink-900/20 to-transparent mix-blend-overlay"></div>
               </div>
@@ -472,7 +997,7 @@ export default function App() {
                       Featured
                     </p>
                     <p className="text-xs font-serif font-bold text-stone-800">
-                      Vogue Paris
+                      BaliBee Beauty
                     </p>
                   </div>
                 </div>
@@ -549,6 +1074,7 @@ export default function App() {
             {PORTFOLIO_DATA.map((item) => (
               <FadeIn key={item.id} delay={item.delay} direction="up">
                 <div
+                  onClick={() => openProject(item.title)}
                   className={`relative group overflow-hidden rounded-[2rem] cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-700 ${item.aspect} bg-white p-2 border border-pink-50`}
                 >
                   <div className="relative w-full h-full rounded-[1.5rem] overflow-hidden">
@@ -614,23 +1140,28 @@ export default function App() {
                   The Artist
                 </h4>
                 <h2 className="text-5xl md:text-6xl font-serif text-stone-900 mb-8 leading-tight">
-                  Embodying{" "}
-                  <span className="italic text-pink-400">Elegance</span> <br />&
-                  Grace.
+                  Embodying Elegance & Confident
                 </h2>
                 <div className="glass-panel p-8 rounded-3xl mb-10 border-white/80 shadow-sm relative overflow-hidden">
                   <div className="absolute top-0 right-0 w-32 h-32 bg-pink-100 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 opacity-50"></div>
                   <p className="text-stone-600 font-light leading-relaxed mb-6 text-lg relative z-10">
-                    Based in the fashion capitals of the world, GEKTA brings
-                    more than just a striking appearance to the lens. With a
-                    background in classical dance and an innate understanding of
-                    high-fashion storytelling, she breathes life into every
-                    concept.
+                    GEKTA is an emerging muse who started her journey through an
+                    opportunity to model for a makeup project by Triloka MUA
+                    Bali, allowing her to build her very first portfolio. What
+                    began as a simple collaboration quickly grew into a passion
+                    for expressing beauty, mood, and storytelling through
+                    visuals.
+                  </p>
+                  <p className="text-stone-600 font-light leading-relaxed mb-6 text-lg relative z-10">
+                    With a strong willingness to learn, she continuously
+                    explores different muse styles, concepts, and creative
+                    directions, developing her presence in front of the camera
+                    with confidence and adaptability.
                   </p>
                   <p className="text-stone-600 font-light leading-relaxed text-lg relative z-10">
-                    Her work bridges the gap between commercial appeal and
-                    avant-garde editorial, making her a sought-after muse
-                    globally.
+                    Open to collaborations, GEKTA is excited to work with
+                    creatives from various backgrounds, bringing fresh energy,
+                    dedication, and a growing artistic vision to every project.
                   </p>
                 </div>
 
@@ -639,127 +1170,12 @@ export default function App() {
                     Gekta
                   </span>
                   <span className="text-[10px] uppercase tracking-widest text-pink-400 font-bold">
-                    Paris • Milan • NY
+                    Denpasar Selatan, Bali
                   </span>
                 </div>
               </FadeIn>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* SERVICES - Glass Cards */}
-      <section
-        id="services"
-        className="py-32 relative z-10 bg-gradient-to-b from-transparent via-pink-50/30 to-transparent"
-      >
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <FadeIn className="text-center mb-20">
-            <h2 className="text-5xl md:text-6xl font-serif text-stone-900 mb-6">
-              Elevating <span className="italic text-pink-400">Brands</span> to
-              Art
-            </h2>
-            <p className="text-stone-500 font-light max-w-2xl mx-auto text-lg">
-              Offering a versatile range of modeling and brand representation
-              services designed for the highest echelon of the fashion and
-              lifestyle industries.
-            </p>
-          </FadeIn>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
-            {SERVICES.map((service, index) => (
-              <FadeIn key={index} delay={index * 150} direction="up">
-                <div className="group h-full glass-panel p-10 md:p-12 rounded-[2.5rem] transition-all duration-500 hover:-translate-y-3 hover:shadow-[0_20px_40px_rgba(244,114,182,0.15)] relative overflow-hidden border-2 border-transparent hover:border-pink-100">
-                  {/* Subtle Gradient background on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-white via-pink-50/50 to-white opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-10"></div>
-
-                  <div className="w-14 h-14 rounded-full bg-white shadow-sm flex items-center justify-center text-pink-400 mb-8 group-hover:scale-110 group-hover:bg-pink-400 group-hover:text-white transition-all duration-500 border border-pink-100">
-                    <Star size={24} strokeWidth={1.5} />
-                  </div>
-                  <h3 className="text-2xl font-serif text-stone-900 mb-4">
-                    {service.title}
-                  </h3>
-                  <p className="text-stone-500 font-light text-base leading-relaxed mb-8">
-                    {service.desc}
-                  </p>
-                  <a
-                    href="#contact"
-                    className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.15em] text-pink-500 font-bold group-hover:text-stone-900 transition-colors"
-                  >
-                    Inquire <ArrowRight size={14} />
-                  </a>
-                </div>
-              </FadeIn>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* TESTIMONIALS SLIDER */}
-      <section
-        id="testimonials"
-        className="py-32 relative z-10 overflow-hidden"
-      >
-        {/* Background Decorative Rings */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full border border-pink-100 opacity-50 -z-10"></div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full border border-pink-200/50 opacity-50 -z-10"></div>
-
-        <div className="max-w-5xl mx-auto px-6 md:px-12 text-center relative z-20">
-          <FadeIn>
-            <Quote
-              className="text-pink-200 w-16 h-16 mx-auto mb-10"
-              fill="currentColor"
-            />
-
-            <div className="relative h-48 md:h-40">
-              {TESTIMONIALS.map((t, idx) => (
-                <div
-                  key={idx}
-                  className={`absolute inset-0 transition-all duration-1000 ease-in-out ${idx === activeTestimonial ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-8 scale-95 pointer-events-none"}`}
-                >
-                  <p className="text-2xl md:text-4xl font-serif text-stone-800 leading-snug mb-8">
-                    "{t.quote}"
-                  </p>
-                  <p className="text-sm uppercase tracking-[0.2em] font-bold text-pink-400">
-                    — {t.author}
-                  </p>
-                </div>
-              ))}
-            </div>
-
-            {/* Controls */}
-            <div className="flex justify-center items-center gap-6 mt-12">
-              <button
-                onClick={() =>
-                  setActiveTestimonial((prev) =>
-                    prev === 0 ? TESTIMONIALS.length - 1 : prev - 1,
-                  )
-                }
-                className="w-10 h-10 rounded-full glass-panel flex items-center justify-center text-stone-500 hover:text-pink-500 hover:bg-white transition-all shadow-sm"
-              >
-                <ChevronLeft size={18} />
-              </button>
-              <div className="flex gap-2">
-                {TESTIMONIALS.map((_, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => setActiveTestimonial(idx)}
-                    className={`w-2 h-2 rounded-full transition-all duration-300 ${idx === activeTestimonial ? "bg-pink-500 w-6" : "bg-pink-200"}`}
-                  />
-                ))}
-              </div>
-              <button
-                onClick={() =>
-                  setActiveTestimonial(
-                    (prev) => (prev + 1) % TESTIMONIALS.length,
-                  )
-                }
-                className="w-10 h-10 rounded-full glass-panel flex items-center justify-center text-stone-500 hover:text-pink-500 hover:bg-white transition-all shadow-sm"
-              >
-                <ChevronRight size={18} />
-              </button>
-            </div>
-          </FadeIn>
         </div>
       </section>
 
@@ -780,17 +1196,17 @@ export default function App() {
                     <span className="italic text-pink-400">Magic.</span>
                   </h2>
                   <p className="text-stone-500 font-light text-lg mb-12">
-                    Available for worldwide bookings, editorial shoots, and
-                    high-end brand campaigns.
+                    Available for muse makeup, photoshoots, talent, and upcoming
+                    campaigns.
                   </p>
 
                   <div className="space-y-6">
                     <div className="flex items-center space-x-4 text-stone-600 hover:text-pink-500 transition-colors cursor-pointer group">
                       <div className="w-12 h-12 rounded-full bg-white border border-pink-100 flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
-                        <Mail size={18} />
+                        <Phone size={18} />
                       </div>
                       <span className="font-medium tracking-wide">
-                        booking@gekta-muse.com
+                        08873543230
                       </span>
                     </div>
                     <div className="flex items-center space-x-4 text-stone-600 hover:text-pink-500 transition-colors cursor-pointer group">
@@ -798,7 +1214,7 @@ export default function App() {
                         <Instagram size={18} />
                       </div>
                       <span className="font-medium tracking-wide">
-                        @gekta_official
+                        @desakkpuspita
                       </span>
                     </div>
                   </div>
@@ -863,7 +1279,7 @@ export default function App() {
             GEKTA<span className="text-pink-400">.</span>
           </div>
           <div className="flex space-x-6 mb-8">
-            {[Instagram, Twitter, Mail].map((Icon, idx) => (
+            {[Instagram, Twitter, Phone].map((Icon, idx) => (
               <a
                 key={idx}
                 href="#"
