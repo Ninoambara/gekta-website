@@ -1102,7 +1102,7 @@ export default function App() {
               <div className="relative rounded-[1.5rem] overflow-hidden shadow-inner bg-white/80 w-full h-[500px] md:h-[600px] border border-pink-100">
                 {/* Embed Google Calendar */}
                 <iframe
-                  src="https://calendar.google.com/calendar/embed?src=2adc6302f9f2bbfb66756cfd66a0c6960be5227d943acacc22e022e69f978427%40group.calendar.google.com&ctz=Asia%2FMakassar"
+                  src="https://calendar.google.com/calendar/embed?src=2adc6302f9f2bbfb66756cfd66a0c6960be5227d943acacc22e022e69f978427%40group.calendar.google.com&ctz=Asia%2FMakassar&color=%23F472B6"
                   style={{ borderWidth: 0, width: "100%", height: "100%" }}
                   frameBorder="0"
                   scrolling="no"
