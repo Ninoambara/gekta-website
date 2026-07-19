@@ -985,9 +985,14 @@ export default function App() {
               direction="up"
               className="flex flex-col sm:flex-row gap-5 w-full sm:w-auto"
             >
-              <button className="px-8 py-4 bg-gradient-to-r from-pink-400 to-rose-400 text-white rounded-full uppercase tracking-widest text-xs font-semibold hover:from-pink-500 hover:to-rose-500 transition-all duration-500 shadow-[0_10px_30px_rgba(244,114,182,0.4)] hover:shadow-[0_15px_40px_rgba(244,114,182,0.6)] hover:-translate-y-1 flex justify-center items-center gap-2">
-                Book GEKTA <ArrowRight size={16} />
-              </button>
+              <a
+                href="https://wa.me/62882001901247"
+                target="_blank"
+                rel="noreferrer"
+                className="px-8 py-4 bg-gradient-to-r from-pink-400 to-rose-400 text-white rounded-full uppercase tracking-widest text-xs font-semibold hover:from-pink-500 hover:to-rose-500 transition-all duration-500 shadow-[0_10px_30px_rgba(244,114,182,0.4)] hover:shadow-[0_15px_40px_rgba(244,114,182,0.6)] hover:-translate-y-1 flex justify-center items-center gap-2"
+              >
+                Book GEKTA via WhatsApp <ArrowRight size={16} />
+              </a>
               <button className="px-8 py-4 glass-panel text-stone-900 rounded-full uppercase tracking-widest text-xs font-semibold hover:bg-white/80 transition-all duration-500 shadow-sm hover:shadow-md flex justify-center items-center">
                 View Portfolio
               </button>
@@ -1097,7 +1102,7 @@ export default function App() {
               <div className="relative rounded-[1.5rem] overflow-hidden shadow-inner bg-white/80 w-full h-[500px] md:h-[600px] border border-pink-100">
                 {/* Embed Google Calendar */}
                 <iframe
-                  src="https://calendar.google.com/calendar/embed?src=ninoambara1%40gmail.com&ctz=Asia%2FMakassar&color=%23F472B6"
+                  src="https://calendar.google.com/calendar/embed?src=2adc6302f9f2bbfb66756cfd66a0c6960be5227d943acacc22e022e69f978427%40group.calendar.google.com&ctz=Asia%2FMakassar"
                   style={{ borderWidth: 0, width: "100%", height: "100%" }}
                   frameBorder="0"
                   scrolling="no"
