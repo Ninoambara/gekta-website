@@ -15,18 +15,19 @@ import {
 const useIntersectionObserver = (options = {}) => {
   const [isIntersecting, setIsIntersecting] = useState(false);
   const targetRef = useRef(null);
+  const { triggerOnce = false, threshold = 0.1 } = options;
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsIntersecting(true);
-          if (options.triggerOnce) observer.unobserve(entry.target);
-        } else if (!options.triggerOnce) {
+          if (triggerOnce) observer.unobserve(entry.target);
+        } else if (!triggerOnce) {
           setIsIntersecting(false);
         }
       },
-      { threshold: 0.1, ...options },
+      { threshold },
     );
 
     const currentTarget = targetRef.current;
@@ -35,7 +36,7 @@ const useIntersectionObserver = (options = {}) => {
     return () => {
       if (currentTarget) observer.unobserve(currentTarget);
     };
-  }, [options.triggerOnce]);
+  }, [threshold, triggerOnce]);
 
   return [targetRef, isIntersecting];
 };
@@ -711,6 +712,10 @@ const TESTIMONIALS = [
   },
 ];
 
+const PROJECTS = Array.from(
+  new Map(PORTFOLIO_DATA.map((item) => [item.title, item])).values(),
+);
+
 const slugifyTitle = (title) =>
   title
     .toLowerCase()
@@ -726,7 +731,7 @@ const getProjectSlugFromHash = (hash) => {
 
 export default function App() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [activeTestimonial, setActiveTestimonial] = useState(0);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeProjectSlug, setActiveProjectSlug] = useState(() =>
     getProjectSlugFromHash(window.location.hash),
   );
@@ -740,14 +745,6 @@ export default function App() {
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Testimonial Autoplay
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setActiveTestimonial((prev) => (prev + 1) % TESTIMONIALS.length);
-    }, 5000);
-    return () => clearInterval(timer);
   }, []);
 
   useEffect(() => {
@@ -782,20 +779,55 @@ export default function App() {
   const activeProjectImages = activeProjectTitle
     ? PORTFOLIO_DATA.filter((item) => item.title === activeProjectTitle)
     : [];
+  const adContainerRef = useRef(null);
+
+  useEffect(() => {
+    if (activeProjectSlug || !adContainerRef.current) return undefined;
+
+    window.atOptions = {
+      key: "9ee93fabed6d78391157ad6e861f48d1",
+      format: "iframe",
+      height: 90,
+      width: 728,
+      params: {},
+    };
+
+    const adScripts = [
+      "https://www.highrevenueformat.com/9ee93fabed6d78391157ad6e861f48d1/invoke.js",
+      "https://pl31253519.profitableratecpmnetwork.com/a6/70/a3/a670a3d699b15003d4c95b6a44a7d4fe.js",
+      "https://pl31253520.profitableratecpmnetwork.com/5e/08/ae/5e08ae9cca19fceb73a1eea227ce5297.js",
+      "https://pl31253521.profitableratecpmnetwork.com/0291f5a1c23579d4da0f60257db583ab/invoke.js",
+    ];
+
+    adScripts.forEach((src, index) => {
+      const script = document.createElement("script");
+      script.src = src;
+      if (index === 3) {
+        script.async = true;
+        script.dataset.cfasync = "false";
+      }
+      adContainerRef.current.appendChild(script);
+    });
+
+    return undefined;
+  }, [activeProjectSlug]);
 
   const openProject = (title) => {
     lastCatalogScrollY.current = window.scrollY;
-    window.location.hash = `project/${slugifyTitle(title)}`;
+    const slug = slugifyTitle(title);
+    window.history.pushState(null, "", `#project/${slug}`);
+    setActiveProjectSlug(slug);
   };
 
   const closeProject = () => {
     shouldRestoreCatalogScroll.current = true;
-    window.location.hash = "portfolio";
+    window.history.pushState(null, "", "#portfolio");
+    setActiveProjectSlug("");
   };
 
   if (activeProjectTitle) {
     return (
-      <div className="font-sans text-stone-800 bg-[#FFFFFF] min-h-screen">
+      <div className="cute-site font-sans text-stone-800 bg-[#FFFFFF] min-h-screen">
         <section className="py-20 md:py-28">
           <div className="max-w-7xl mx-auto px-6 md:px-12">
             <button
@@ -836,7 +868,7 @@ export default function App() {
   }
 
   return (
-    <div className="font-sans text-stone-800 bg-[#FFFFFF] overflow-x-hidden selection:bg-pink-200 selection:text-pink-900">
+    <div className="cute-site font-sans text-stone-800 bg-[#FFFFFF] overflow-x-hidden selection:bg-pink-200 selection:text-pink-900">
       {/* GLOBAL STYLES & FONTS */}
       <style
         dangerouslySetInnerHTML={{
@@ -849,27 +881,27 @@ export default function App() {
 
         /* 3D & Motion Utilities */
         .glass-panel {
-          background: rgba(255, 255, 255, 0.45);
-          backdrop-filter: blur(16px);
-          -webkit-backdrop-filter: blur(16px);
-          border: 1px solid rgba(255, 255, 255, 0.6);
-          box-shadow: 0 8px 32px 0 rgba(244, 114, 182, 0.07);
+          background: rgba(255, 255, 255, 0.72);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.9);
+          box-shadow: 0 12px 28px rgba(244, 114, 182, 0.1);
         }
 
         .perspective-1000 { perspective: 1000px; }
         .preserve-3d { transform-style: preserve-3d; }
 
         @keyframes float-3d {
-          0%, 100% { transform: rotateY(-5deg) rotateX(2deg) translateY(0px); }
-          50% { transform: rotateY(5deg) rotateX(-2deg) translateY(-15px); }
+          0%, 100% { transform: rotateY(-2deg) rotateX(1deg) translateY(0px); }
+          50% { transform: rotateY(2deg) rotateX(-1deg) translateY(-8px); }
         }
         .animate-float-3d {
           animation: float-3d 8s ease-in-out infinite;
         }
 
         @keyframes float {
-          0%, 100% { transform: translateY(0px) translateX(0px); }
-          50% { transform: translateY(-20px) translateX(10px); }
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-10px); }
         }
         .animate-float {
           animation: float 8s ease-in-out infinite;
@@ -880,10 +912,10 @@ export default function App() {
 
         /* Ambient Glows */
         .glow-pink {
-          background: radial-gradient(circle, rgba(251,207,232,0.8) 0%, rgba(255,255,255,0) 70%);
+          background: radial-gradient(circle, rgba(251,207,232,0.65) 0%, rgba(255,255,255,0) 70%);
         }
         .glow-rose {
-          background: radial-gradient(circle, rgba(255,228,230,0.8) 0%, rgba(255,255,255,0) 70%);
+          background: radial-gradient(circle, rgba(254,205,211,0.55) 0%, rgba(255,255,255,0) 70%);
         }
 
         ::-webkit-scrollbar { width: 8px; }
@@ -933,7 +965,13 @@ export default function App() {
           <button className="hidden md:flex items-center gap-2 px-6 py-2.5 bg-stone-900 text-white rounded-full text-xs uppercase tracking-widest hover:bg-pink-500 transition-colors duration-500 shadow-lg shadow-pink-500/20">
             Book Now
           </button>
-          <button className="md:hidden text-stone-900">
+          <button
+            type="button"
+            aria-label="Toggle navigation"
+            aria-expanded={isMenuOpen}
+            onClick={() => setIsMenuOpen((open) => !open)}
+            className="md:hidden text-stone-900"
+          >
             <svg
               className="w-6 h-6"
               fill="none"
@@ -949,6 +987,20 @@ export default function App() {
             </svg>
           </button>
         </div>
+        {isMenuOpen && (
+          <div className="mobile-nav md:hidden">
+            {[
+              ["About", "#about"],
+              ["Portfolio", "#portfolio"],
+              ["Schedule", "#jadwal"],
+              ["Contact", "#contact"],
+            ].map(([label, href]) => (
+              <a key={label} href={href} onClick={() => setIsMenuOpen(false)}>
+                {label}
+              </a>
+            ))}
+          </div>
+        )}
       </nav>
 
       {/* HERO SECTION - 3D & High Conversion */}
@@ -993,7 +1045,7 @@ export default function App() {
               >
                 Book GEKTA via WhatsApp <ArrowRight size={16} />
               </a>
-              <button className="px-8 py-4 glass-panel text-stone-900 rounded-full uppercase tracking-widest text-xs font-semibold hover:bg-white/80 transition-all duration-500 shadow-sm hover:shadow-md flex justify-center items-center">
+              <button onClick={() => document.getElementById("portfolio")?.scrollIntoView({ behavior: "smooth" })} className="px-8 py-4 glass-panel text-stone-900 rounded-full uppercase tracking-widest text-xs font-semibold hover:bg-white/80 transition-all duration-500 shadow-sm hover:shadow-md flex justify-center items-center">
                 View Portfolio
               </button>
             </FadeIn>
@@ -1003,16 +1055,20 @@ export default function App() {
               direction="up"
               className="mt-12 pt-8 border-t border-pink-100 w-full lg:max-w-md"
             >
-              <p className="text-[10px] uppercase tracking-[0.15em] text-stone-400 font-semibold mb-3">
-                Available For
-              </p>
-              <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-stone-600 font-serif italic">
-                <span>muse makeup</span>{" "}
-                <span className="text-pink-300">•</span>
-                <span>photoshoots</span>{" "}
-                <span className="text-pink-300">•</span>
-                <span>talent</span> <span className="text-pink-300">•</span>
-                <span>upcoming campaigns</span>
+              <div className="availability-card">
+                <p className="mb-3 flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.15em] text-pink-500">
+                  <span className="availability-dot" />
+                  Available for
+                </p>
+                <ul className="grid grid-cols-2 gap-2 text-xs font-semibold text-stone-600 sm:grid-cols-4">
+                  {["Muse makeup", "Photoshoots", "Talent", "Campaigns"].map(
+                    (item) => (
+                      <li key={item} className="availability-chip">
+                        {item}
+                      </li>
+                    ),
+                  )}
+                </ul>
               </div>
             </FadeIn>
           </div>
@@ -1114,50 +1170,59 @@ export default function App() {
         </div>
       </section>
 
+      {/* ADVERTISEMENT */}
+      <section className="relative z-10 bg-white py-8">
+        <div
+          ref={adContainerRef}
+          id="container-0291f5a1c23579d4da0f60257db583ab"
+          className="mx-auto flex min-h-[90px] max-w-[728px] items-center justify-center overflow-hidden"
+        ></div>
+      </section>
+
       {/* FEATURED PORTFOLIO */}
       <section
         id="portfolio"
         className="py-32 relative z-10 bg-white/50 backdrop-blur-3xl border-y border-white"
       >
         <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <FadeIn className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+          <FadeIn className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
             <div>
               <h2 className="text-5xl md:text-6xl font-serif text-stone-900 leading-tight">
-                Selected <span className="italic text-pink-400">Works</span>
+                Little Pretty <span className="text-pink-400">Projects</span>
               </h2>
+              <p className="mt-4 max-w-md text-sm leading-6 text-stone-500">
+                A little collection of collaborations, one story at a time.
+              </p>
             </div>
-            <button className="group flex items-center gap-2 text-xs uppercase tracking-[0.15em] font-semibold text-stone-600 hover:text-pink-500 transition-colors">
-              Explore Full Archive
-              <span className="w-8 h-[1px] bg-pink-300 group-hover:w-12 group-hover:bg-pink-500 transition-all duration-300"></span>
-            </button>
+            <p className="text-xs uppercase tracking-[0.15em] font-semibold text-pink-500">
+              Tap a cover to view the full set
+            </p>
           </FadeIn>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {PORTFOLIO_DATA.map((item) => (
-              <FadeIn key={item.id} delay={item.delay} direction="up">
-                <div
+          <div className="gallery-grid grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {PROJECTS.map((item, index) => (
+              <FadeIn key={item.title} delay={Math.min(index * 70, 420)} direction="up" className={index === 0 ? "sm:col-span-2 lg:col-span-2" : ""}>
+                <button
+                  type="button"
                   onClick={() => openProject(item.title)}
-                  className={`relative group overflow-hidden rounded-[2rem] cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-700 ${item.aspect} bg-white p-2 border border-pink-50`}
+                  className={`cute-card gallery-card gallery-card-${index % 4} relative group flex w-full flex-col overflow-hidden rounded-[2.25rem] bg-white p-3 text-left transition-all duration-500 ${index === 0 ? "aspect-[16/10]" : item.aspect}`}
                 >
-                  <div className="relative w-full h-full rounded-[1.5rem] overflow-hidden">
+                  <div className="relative min-h-0 w-full flex-1 rounded-[1.5rem] overflow-hidden">
                     <img
                       src={item.img}
                       alt={item.title}
                       className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                     />
-                    {/* Glassmorphism Hover Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-pink-100/90 via-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 backdrop-blur-[2px] flex flex-col justify-end p-8">
-                      <div className="transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500 ease-out">
-                        <span className="inline-block px-3 py-1 mb-3 text-[10px] uppercase tracking-widest text-pink-600 bg-white/80 backdrop-blur-md rounded-full font-bold shadow-sm">
-                          View Project
-                        </span>
-                        <h3 className="text-stone-900 text-3xl font-serif drop-shadow-md">
-                          {item.title}
-                        </h3>
-                      </div>
-                    </div>
                   </div>
-                </div>
+                  <div className="gallery-caption flex shrink-0 items-center justify-between gap-3 px-2 pb-1 pt-4">
+                    <h3 className="min-w-0 truncate text-xl font-serif text-stone-900">
+                      ♡ {item.title}
+                    </h3>
+                    <span className="shrink-0 text-[10px] font-bold uppercase tracking-widest text-pink-500">
+                      Open
+                    </span>
+                  </div>
+                </button>
               </FadeIn>
             ))}
           </div>

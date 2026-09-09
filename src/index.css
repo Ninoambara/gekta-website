@@ -1,3 +1,222 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Hallmark · macrostructure: original portfolio · tone: soft playful · P4 H4 E4 S4 R5 V3 */
+:root {
+  --cute-paper: #fff9fc;
+  --cute-pink: #f472b6;
+  --cute-pink-soft: #fce7f3;
+  --cute-lavender: #ede9fe;
+  --cute-butter: #fef3c7;
+  --cute-mint: #dcfce7;
+  --cute-ink: #4a3540;
+}
+
+html,
+body {
+  overflow-x: clip;
+  scroll-behavior: smooth;
+}
+
+:focus-visible {
+  outline: 2px solid #ec4899;
+  outline-offset: 3px;
+}
+
+.cute-card {
+  box-shadow: 0 12px 28px rgb(244 114 182 / 0.14);
+}
+
+.cute-card:hover {
+  box-shadow: 0 20px 38px rgb(244 114 182 / 0.18);
+  transform: translateY(-4px);
+}
+
+.gallery-grid > div {
+  min-width: 0;
+}
+
+.gallery-card-0 {
+  background: #fde2ef;
+  transform: rotate(-1deg);
+}
+
+.gallery-card-1 {
+  background: #e8e2ff;
+  transform: rotate(1deg);
+}
+
+.gallery-card-2 {
+  background: #fff0c9;
+  transform: rotate(-0.6deg);
+}
+
+.gallery-card-3 {
+  background: #dff6ee;
+  transform: rotate(0.8deg);
+}
+
+.gallery-card:hover {
+  transform: translateY(-6px) rotate(0deg);
+}
+
+.gallery-caption {
+  min-width: 0;
+}
+
+.availability-card {
+  border: 1px solid rgb(244 114 182 / 0.18);
+  border-radius: 1.25rem;
+  background: rgb(255 255 255 / 0.56);
+  box-shadow: 0 10px 24px rgb(244 114 182 / 0.07);
+  padding: 0.875rem;
+}
+
+.availability-dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 999px;
+  background: #f472b6;
+  box-shadow: 0 0 0 4px rgb(244 114 182 / 0.13);
+}
+
+.availability-chip {
+  border: 1px solid rgb(244 114 182 / 0.12);
+  border-radius: 0.8rem;
+  background: rgb(255 255 255 / 0.86);
+  padding: 0.65rem 0.45rem;
+  text-align: center;
+}
+
+.cute-site {
+  background: radial-gradient(circle at 8% 10%, var(--cute-lavender) 0, transparent 23%), radial-gradient(circle at 93% 34%, var(--cute-pink-soft) 0, transparent 26%), var(--cute-paper) !important;
+  color: var(--cute-ink);
+}
+
+.cute-site .glass-panel {
+  background: rgb(255 255 255 / 0.78);
+  border-color: rgb(244 114 182 / 0.18);
+  box-shadow: 0 14px 30px rgb(244 114 182 / 0.1);
+}
+
+.cute-site .bg-white,
+.cute-site .bg-white\/40,
+.cute-site .bg-white\/50,
+.cute-site .bg-white\/60,
+.cute-site .bg-white\/80 {
+  background-color: rgb(255 255 255 / 0.72);
+}
+
+.cute-site .bg-stone-50 { background-color: var(--cute-pink-soft); }
+.cute-site .border-pink-50,
+.cute-site .border-pink-100,
+.cute-site .border-pink-200 { border-color: rgb(244 114 182 / 0.18); }
+
+.cute-site .bg-pink-50 { background-color: var(--cute-pink-soft); }
+.cute-site .bg-pink-100 { background-color: #fce7f3; }
+.cute-site .bg-rose-100 { background-color: var(--cute-lavender); }
+.cute-site .bg-pink-200 { background-color: #fbcfe8; }
+.cute-site .bg-pink-300 { background-color: #f9a8d4; }
+
+.cute-site section { scroll-margin-top: 5rem; }
+.cute-site section:nth-of-type(even) { background-color: rgb(255 255 255 / 0.42); }
+
+.cute-site h1,
+.cute-site h2,
+.cute-site h3 { text-wrap: balance; }
+
+.cute-site input,
+.cute-site textarea {
+  background: rgb(255 255 255 / 0.56) !important;
+  border-radius: 0.9rem;
+  padding-inline: 0.75rem;
+}
+
+.cute-site footer {
+  background: var(--cute-lavender) !important;
+  border-color: rgb(244 114 182 / 0.18);
+}
+
+/* Keep the scrapbook colours above the site-wide white panel treatment. */
+.cute-site .gallery-card-0 { background: #fde2ef; }
+.cute-site .gallery-card-1 { background: #e8e2ff; }
+.cute-site .gallery-card-2 { background: #fff0c9; }
+.cute-site .gallery-card-3 { background: #dff6ee; }
+
+.mobile-nav {
+  display: grid;
+  gap: 0.25rem;
+  margin-top: 0.5rem;
+  padding: 0.75rem 1.5rem 1.25rem;
+  background: rgb(255 249 252 / 0.96);
+  border-top: 1px solid rgb(244 114 182 / 0.16);
+  box-shadow: 0 12px 24px rgb(244 114 182 / 0.1);
+}
+
+.mobile-nav a {
+  padding: 0.85rem 0.25rem;
+  color: var(--cute-ink);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 640px) {
+  .cute-site h1,
+  .cute-site h2,
+  .cute-site h3,
+  .cute-site .font-script {
+    line-height: 1.08;
+    min-width: 0;
+    overflow-wrap: anywhere;
+    padding-bottom: 0.08em;
+  }
+
+  .cute-site p,
+  .cute-site a,
+  .cute-site button,
+  .cute-site span {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .cute-card {
+    border-radius: 1.5rem;
+    transform: none;
+  }
+
+  .cute-site section:not(#top) {
+    padding-block: 5rem;
+  }
+
+  .cute-site h1 {
+    font-size: clamp(4.5rem, 24vw, 6rem);
+  }
+
+  .cute-site .gallery-grid {
+    gap: 1rem;
+  }
+
+  .cute-site .gallery-caption {
+    padding-top: 0.75rem;
+  }
+
+  .cute-site .gallery-caption h3 {
+    font-size: 1rem;
+    overflow: visible;
+    text-overflow: clip;
+    white-space: normal;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
