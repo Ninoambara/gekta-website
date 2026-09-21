@@ -779,38 +779,6 @@ export default function App() {
   const activeProjectImages = activeProjectTitle
     ? PORTFOLIO_DATA.filter((item) => item.title === activeProjectTitle)
     : [];
-  const adContainerRef = useRef(null);
-
-  useEffect(() => {
-    if (activeProjectSlug || !adContainerRef.current) return undefined;
-
-    window.atOptions = {
-      key: "9ee93fabed6d78391157ad6e861f48d1",
-      format: "iframe",
-      height: 90,
-      width: 728,
-      params: {},
-    };
-
-    const adScripts = [
-      "https://www.highrevenueformat.com/9ee93fabed6d78391157ad6e861f48d1/invoke.js",
-      "https://pl31253519.profitableratecpmnetwork.com/a6/70/a3/a670a3d699b15003d4c95b6a44a7d4fe.js",
-      "https://pl31253520.profitableratecpmnetwork.com/5e/08/ae/5e08ae9cca19fceb73a1eea227ce5297.js",
-      "https://pl31253521.profitableratecpmnetwork.com/0291f5a1c23579d4da0f60257db583ab/invoke.js",
-    ];
-
-    adScripts.forEach((src, index) => {
-      const script = document.createElement("script");
-      script.src = src;
-      if (index === 3) {
-        script.async = true;
-        script.dataset.cfasync = "false";
-      }
-      adContainerRef.current.appendChild(script);
-    });
-
-    return undefined;
-  }, [activeProjectSlug]);
 
   const openProject = (title) => {
     lastCatalogScrollY.current = window.scrollY;
@@ -1168,15 +1136,6 @@ export default function App() {
             </div>
           </FadeIn>
         </div>
-      </section>
-
-      {/* ADVERTISEMENT */}
-      <section className="relative z-10 bg-white py-8">
-        <div
-          ref={adContainerRef}
-          id="container-0291f5a1c23579d4da0f60257db583ab"
-          className="mx-auto flex min-h-[90px] max-w-[728px] items-center justify-center overflow-hidden"
-        ></div>
       </section>
 
       {/* FEATURED PORTFOLIO */}
