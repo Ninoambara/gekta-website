@@ -1,5 +1,3 @@
-export default function handler() {
-  return new Response(JSON.stringify({ ok: true }), {
-    headers: { "content-type": "application/json", "set-cookie": "gekta_admin=; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=0" },
-  });
+export function GET() {
+  return Response.json({ ok: true }, { headers: { "set-cookie": "gekta_admin=; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=0" } });
 }

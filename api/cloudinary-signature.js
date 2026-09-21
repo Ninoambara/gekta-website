@@ -1,7 +1,6 @@
-import { cloudinaryConfig, isAdmin, json, signParams } from "./_lib/cloudinary.js";
+import { cloudinaryConfig, isAdmin, json, signParams } from "../lib/cloudinary.js";
 
-export default function handler(request) {
-  if (request.method !== "POST") return json({ error: "Method not allowed" }, 405);
+export function POST(request) {
   if (!isAdmin(request)) return json({ error: "Unauthorized" }, 401);
   const { cloudName, apiKey, apiSecret } = cloudinaryConfig();
   const timestamp = Math.floor(Date.now() / 1000);

@@ -1,7 +1,6 @@
-import { cloudinaryRequest, json, PORTFOLIO_TAG, PUBLISHED_TAG } from "./_lib/cloudinary.js";
+import { cloudinaryRequest, json, PORTFOLIO_TAG, PUBLISHED_TAG } from "../lib/cloudinary.js";
 
-export default async function handler(request) {
-  if (request.method !== "GET") return json({ error: "Method not allowed" }, 405);
+export async function GET() {
   try {
     const response = await cloudinaryRequest(`/resources/image/tags/${PUBLISHED_TAG}?max_results=500`);
     if (!response.ok) return json({ error: "Cloudinary request failed" }, 502);

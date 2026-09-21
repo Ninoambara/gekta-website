@@ -1,16 +1,21 @@
 /* global process */
-import { cloudinaryConfig, cloudinaryRequest, isAdmin, json, PORTFOLIO_TAG, PUBLISHED_TAG, signParams } from "./_lib/cloudinary.js";
+import { cloudinaryConfig, cloudinaryRequest, isAdmin, json, PORTFOLIO_TAG, PUBLISHED_TAG, signParams } from "../lib/cloudinary.js";
 
-export default async function handler(request) {
+export async function GET(request) {
   if (!isAdmin(request)) return json({ error: "Unauthorized" }, 401);
   try {
-    if (request.method === "GET") {
-      const response = await cloudinaryRequest(`/resources/image/tags/${PORTFOLIO_TAG}?max_results=500`);
-      if (!response.ok) return json({ error: "Cloudinary request failed" }, 502);
-      const data = await response.json();
-      return json({ photos: (data.resources || []).map((asset) => ({ ...asset, published: asset.tags?.includes(PUBLISHED_TAG) })) });
-    }
-    if (request.method !== "POST") return json({ error: "Method not allowed" }, 405);
+    const response = await cloudinaryRequest(`/resources/image/tags/${PORTFOLIO_TAG}?max_results=500`);
+    if (!response.ok) return json({ error: "Cloudinary request failed" }, 502);
+    const data = await response.json();
+    return json({ photos: (data.resources || []).map((asset) => ({ ...asset, published: asset.tags?.includes(PUBLISHED_TAG) })) });
+  } catch (error) {
+    return json({ error: error.message }, 500);
+  }
+}
+
+export async function POST(request) {
+  if (!isAdmin(request)) return json({ error: "Unauthorized" }, 401);
+  try {
     const { action, publicId } = await request.json();
     if (!publicId) return json({ error: "publicId wajib diisi" }, 400);
     if (action === "publish" || action === "unpublish") {
