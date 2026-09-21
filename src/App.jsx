@@ -712,10 +712,6 @@ const TESTIMONIALS = [
   },
 ];
 
-const PROJECTS = Array.from(
-  new Map(PORTFOLIO_DATA.map((item) => [item.title, item])).values(),
-);
-
 const slugifyTitle = (title) =>
   title
     .toLowerCase()
@@ -729,12 +725,93 @@ const getProjectSlugFromHash = (hash) => {
   return cleanedHash.slice("project/".length);
 };
 
+function AdminPanel() {
+  const [password, setPassword] = useState("");
+  const [photos, setPhotos] = useState([]);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const loadPhotos = async () => {
+    const response = await fetch("/api/admin-photos");
+    if (response.ok) {
+      setPhotos((await response.json()).photos || []);
+      setLoggedIn(true);
+    }
+  };
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/api/admin-photos")
+      .then((response) => (response.ok ? response.json() : null))
+      .then((data) => {
+        if (!cancelled && data) {
+          setPhotos(data.photos || []);
+          setLoggedIn(true);
+        }
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const login = async (event) => {
+    event.preventDefault();
+    const response = await fetch("/api/admin-login", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ password }),
+    });
+    if (response.ok) {
+      setPassword("");
+      setMessage("");
+      loadPhotos();
+    } else {
+      setMessage("Password salah.");
+    }
+  };
+
+  const upload = async (event) => {
+    const files = [...event.target.files];
+    setMessage("Mengupload foto...");
+    for (const file of files) {
+      const signatureResponse = await fetch("/api/cloudinary-signature", { method: "POST" });
+      const signature = await signatureResponse.json();
+      if (!signatureResponse.ok) throw new Error(signature.error);
+      const form = new FormData();
+      form.append("file", file);
+      Object.entries(signature).forEach(([key, value]) => {
+        if (key !== "signature") form.append(key, value);
+      });
+      form.append("signature", signature.signature);
+      const response = await fetch(`https://api.cloudinary.com/v1_1/${signature.cloudName}/image/upload`, { method: "POST", body: form });
+      if (!response.ok) throw new Error("Upload gagal");
+    }
+    event.target.value = "";
+    setMessage("Upload selesai.");
+    loadPhotos();
+  };
+
+  const updatePhoto = async (publicId, action) => {
+    await fetch("/api/admin-photos", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ publicId, action }) });
+    loadPhotos();
+  };
+
+  if (!loggedIn) {
+    return <main className="min-h-screen bg-pink-50 p-6"><form onSubmit={login} className="mx-auto mt-24 max-w-sm rounded-3xl bg-white p-8 shadow-xl"><h1 className="mb-6 text-3xl font-serif">GEKTA Admin</h1><input autoFocus type="password" value={password} onChange={(event) => setPassword(event.target.value)} placeholder="Password admin" className="mb-4 w-full border p-3" /><button className="w-full rounded-full bg-pink-500 p-3 font-semibold text-white">Masuk</button>{message && <p className="mt-3 text-sm text-red-500">{message}</p>}</form></main>;
+  }
+
+  return <main className="min-h-screen bg-pink-50 p-6"><div className="mx-auto max-w-5xl"><div className="mb-8 flex items-center justify-between"><h1 className="text-4xl font-serif">Kelola Portfolio</h1><label className="cursor-pointer rounded-full bg-pink-500 px-5 py-3 font-semibold text-white">Upload Foto<input type="file" accept="image/*" multiple onChange={upload} className="hidden" /></label></div>{message && <p className="mb-4 text-sm text-stone-600">{message}</p>}<div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{photos.map((photo) => <article key={photo.asset_id} className="overflow-hidden rounded-2xl bg-white p-3 shadow"><img src={photo.secure_url} alt={photo.public_id} className="aspect-square w-full rounded-xl object-cover" /><p className="mt-3 truncate text-sm">{photo.public_id}</p><div className="mt-3 flex gap-2"><button onClick={() => updatePhoto(photo.public_id, photo.published ? "unpublish" : "publish")} className="flex-1 rounded-full border px-3 py-2 text-xs">{photo.published ? "Sembunyikan" : "Tampilkan"}</button><button onClick={() => updatePhoto(photo.public_id, "delete")} className="rounded-full bg-red-100 px-3 py-2 text-xs text-red-600">Hapus</button></div></article>)}</div></div></main>;
+}
+
 export default function App() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeProjectSlug, setActiveProjectSlug] = useState(() =>
     getProjectSlugFromHash(window.location.hash),
   );
+  const [isAdminPage, setIsAdminPage] = useState(() => window.location.hash === "#admin");
+  const [portfolioData, setPortfolioData] = useState(PORTFOLIO_DATA);
   const lastCatalogScrollY = useRef(0);
   const shouldRestoreCatalogScroll = useRef(false);
 
@@ -750,6 +827,7 @@ export default function App() {
   useEffect(() => {
     const handleHashChange = () => {
       setActiveProjectSlug(getProjectSlugFromHash(window.location.hash));
+      setIsAdminPage(window.location.hash === "#admin");
     };
 
     window.addEventListener("hashchange", handleHashChange);
@@ -772,12 +850,26 @@ export default function App() {
     }
   }, [activeProjectSlug]);
 
+  useEffect(() => {
+    fetch("/api/photos")
+      .then((response) => (response.ok ? response.json() : null))
+      .then((data) => {
+        if (!data?.photos?.length) return;
+        setPortfolioData(data.photos.map((photo, index) => ({ ...photo, aspect: "aspect-[4/5]", delay: Math.min(index * 70, 420) })));
+      })
+      .catch(() => {});
+  }, []);
+
+  if (isAdminPage) return <AdminPanel />;
+
+  const projects = Array.from(new Map(portfolioData.map((item) => [item.title, item])).values());
+
   const activeProjectTitle =
-    PORTFOLIO_DATA.find(
+    portfolioData.find(
       (item) => slugifyTitle(item.title) === activeProjectSlug,
     )?.title || "";
   const activeProjectImages = activeProjectTitle
-    ? PORTFOLIO_DATA.filter((item) => item.title === activeProjectTitle)
+    ? portfolioData.filter((item) => item.title === activeProjectTitle)
     : [];
 
   const openProject = (title) => {
@@ -1159,7 +1251,7 @@ export default function App() {
           </FadeIn>
 
           <div className="gallery-grid grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {PROJECTS.map((item, index) => (
+            {projects.map((item, index) => (
               <FadeIn key={item.title} delay={Math.min(index * 70, 420)} direction="up" className={index === 0 ? "sm:col-span-2 lg:col-span-2" : ""}>
                 <button
                   type="button"
