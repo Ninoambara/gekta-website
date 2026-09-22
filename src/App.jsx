@@ -677,7 +677,7 @@ const PORTFOLIO_DATA = [
 
 const SERVICES = [
   {
-    title: "Muse Makeup",
+    title: "Muse",
     desc: "Collaborative muse sessions for makeup artists who want expressive beauty visuals.",
   },
   {
@@ -1121,7 +1121,7 @@ export default function App() {
                   Available for
                 </p>
                 <ul className="grid grid-cols-2 gap-2 text-xs font-semibold text-stone-600 sm:grid-cols-4">
-                  {["Muse makeup", "Photoshoots", "Talent", "Campaigns"].map(
+                  {["Muse", "Photoshoots", "Talent", "Campaigns"].map(
                     (item) => (
                       <li key={item} className="availability-chip">
                         {item}
@@ -1374,7 +1374,7 @@ export default function App() {
                     <span className="italic text-pink-400">Magic.</span>
                   </h2>
                   <p className="text-stone-500 font-light text-lg mb-12">
-                    Available for muse makeup, photoshoots, talent, and upcoming
+                    Available for muse, photoshoots, talent, and upcoming
                     campaigns.
                   </p>
 
